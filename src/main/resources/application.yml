@@ -1,0 +1,29 @@
+server:
+  port: 8081
+  error:
+    whitelabel:
+      enabled: false
+spring:
+  application:
+    name: es-search-house
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+  jackson:
+    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd
+  thymeleaf:
+    cache: false
+  profiles:
+    active: dev
+logging:
+  file:
+    max-history: 30
+  path: ${user.dir}/logs
