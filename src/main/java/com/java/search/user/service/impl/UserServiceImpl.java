@@ -1,5 +1,6 @@
 package com.java.search.user.service.impl;
 
+import com.java.search.user.entity.User;
 import com.java.search.user.repository.UserRepository;
 import com.java.search.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public User getUserByName(String username) {
+        return userRepository.getByName(username);
     }
 }

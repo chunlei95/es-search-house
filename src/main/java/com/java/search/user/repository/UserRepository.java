@@ -9,4 +9,7 @@ import org.springframework.data.repository.CrudRepository;
  * @since 星期六 二月,2019
  */
 public interface UserRepository extends CrudRepository<User, Long> {
+
+    User getByName(String username);
+
 }

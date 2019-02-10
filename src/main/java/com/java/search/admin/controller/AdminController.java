@@ -16,9 +16,14 @@ public class AdminController {
         return "admin/center";
     }
 
-    @GetMapping("/admin/welcome")
+    @GetMapping("/admin/welcome.html")
     public String welcome() {
         return "admin/welcome";
+    }
+
+    @GetMapping("/admin/login")
+    public String login() {
+        return "admin/login";
     }
 
 }
