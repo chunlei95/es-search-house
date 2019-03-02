@@ -21,7 +21,7 @@ public class ApiResponse<T> {
     private boolean more;
 
     public static <T> ApiResponse<T> ok(T data) {
-        return new ApiResponse<>(ResponseStatus.ACCESS_DENIED.getCode(), ResponseStatus.ACCESS_DENIED.getMessage(), data, false);
+        return new ApiResponse<>(ResponseStatus.SUCCESS.getCode(), ResponseStatus.SUCCESS.getMessage(), data, false);
     }
 
     public static <T> ApiResponse<T> error(int code, String message) {

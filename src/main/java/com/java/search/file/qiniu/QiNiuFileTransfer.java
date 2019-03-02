@@ -8,12 +8,11 @@ import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import com.qiniu.util.StringMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 
 /**
  * @author xzmeasy
@@ -60,11 +59,12 @@ public class QiNiuFileTransfer implements FileTransfer {
 
     @Override
     public ApiResponse<Object> upload(InputStream inputStream) {
+        StringMap putPolicy = new StringMap();
+        putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"fsize\":$(fsize)}");
         Auth auth = Auth.create(accessKey, secretKey);
         String uploadToken = auth.uploadToken(bucket);
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(inputStream.toString().getBytes(Charset.forName("utf-8")));
         try {
-            Response response = uploadManager.put(byteArrayInputStream, key, uploadToken, null, null);
+            Response response = uploadManager.put(inputStream, key, uploadToken, putPolicy, null);
             QiNiuPutRet qiNiuPutRet = new Gson().fromJson(response.bodyString(), QiNiuPutRet.class);
             return ApiResponse.ok(qiNiuPutRet);
         } catch (QiniuException e) {

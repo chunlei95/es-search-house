@@ -27,3 +27,7 @@ logging:
   file:
     max-history: 30
   path: ${user.dir}/logs
+qiniu:
+  access-key: 3GLwXAmBCPoadAC_LA7Hq1aPKGYALhPuu5MyskCA
+  secret-key: V_XTgmoMm2ESipb2hn9G2C3u-VzR7syFEB0R73KF
+  bucket: xzmeasy
